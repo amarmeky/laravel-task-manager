@@ -12,4 +12,4 @@ Route::get('tasks',action: [TaskController::class,'index'] );
 Route::post('tasks',action: [TaskController::class,'store'] );
 Route::put('tasks/{id}',action: [TaskController::class,'update'] );
 Route::get('tasks/{id}',action: [TaskController::class,'show'] );
-Route::delete('tasks/{id}',action: [TaskController::class,'destroy'] );
+Route::delete('tasks/{id}',action: [TaskController::class,'destroy'] ); 
