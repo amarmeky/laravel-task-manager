@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Task;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -26,6 +27,12 @@ class UserController extends Controller
         $profile=User::findOrFail($id)->profile;
         return response()->json(['message'=>'Profile retrieved successfully',
         'profile'=>$profile
+        ], 200);
+    }
+    public function gettasks($id){
+        $tasks = User::findOrFail($id)->tasks;
+        return response()->json(['message' => 'Tasks retrieved successfully',
+        'tasks' => $tasks
         ], 200);
     }
 }

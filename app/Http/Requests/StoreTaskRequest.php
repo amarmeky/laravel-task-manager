@@ -22,10 +22,10 @@ class StoreTaskRequest extends FormRequest
     public function rules(): array
     {
         return [
-            
-            'title' => 'sometimes|required|string|max:255',
-            'description' => 'sometimes|required|string',
-            'priority' => 'sometimes|required|integer|between:1,5'
+            'user_id' => 'required|exists:users,id',
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            'priority' => 'required|integer|between:1,5',
         
         ];
     }

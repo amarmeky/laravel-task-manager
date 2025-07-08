@@ -15,3 +15,5 @@ Route::post('profile', [ProfileController::class, 'store']);
 Route::get('profile/{id}', [ProfileController::class, 'show']);
 Route::get('user/{id}/profile', [UserController::class, 'getprofile']);
 Route::put('user/{id}/profile', [ProfileController::class, 'updateprofile']);
+Route::get('user/{id}/tasks', [UserController::class, 'gettasks']);
+Route::get('tasks/{id}/user', [TaskController::class, 'gettasksuser']);
