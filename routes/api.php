@@ -17,3 +17,5 @@ Route::get('user/{id}/profile', [UserController::class, 'getprofile']);
 Route::put('user/{id}/profile', [ProfileController::class, 'updateprofile']);
 Route::get('user/{id}/tasks', [UserController::class, 'gettasks']);
 Route::get('tasks/{id}/user', [TaskController::class, 'gettasksuser']);
+
+Route::post('tasks/{id}/categories', [TaskController::class, 'addCategorytoTask']);
