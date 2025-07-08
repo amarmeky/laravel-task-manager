@@ -8,7 +8,7 @@ use App\Models\Task;
 
 class TaskController extends Controller
 {
-public function index()
+    public function index()
     {
         $task = Task::all();
         return response()->json($task, 200);
