@@ -55,7 +55,7 @@ return response()->json([
             'profile' => $profile
         ], 200);
     }
-    public function gettasks($id)
+    public function getusertasks($id)
     {
         $tasks = User::findOrFail($id)->tasks;
         return response()->json([

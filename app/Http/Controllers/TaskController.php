@@ -51,4 +51,9 @@ class TaskController extends Controller
         $task->categories()->attach($request->validated());
         return response()->json(['message' => 'Category added successfully'], 200);
     }
+    public function getCategorytoTask($id){
+        $task=Task::findOrFail($id);
+        $categories = $task->categories;
+        return response()->json($categories, 200);
+    }
 }
