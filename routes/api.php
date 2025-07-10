@@ -13,6 +13,8 @@ Route::get('/user', function (Request $request) {
 Route::post('register',[UserController::class,'register']);
 Route::post('login',[UserController::class,'login']);
 Route::post('logout',[UserController::class,'logout'])->middleware('auth:sanctum');
+
+Route::middleware('auth:sanctum')->group(function(){
 Route::get('user/{id}/profile', [UserController::class, 'getprofile']);
 Route::get('user/{id}/tasks', [UserController::class, 'getusertasks']);
 
@@ -27,3 +29,4 @@ Route::get('profile/{id}', [ProfileController::class, 'show']);
 Route::put('user/{id}/profile', [ProfileController::class, 'updateprofile']);
 
 
+});
