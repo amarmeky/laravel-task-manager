@@ -14,11 +14,9 @@ class TaskController extends Controller
 {
     public function index()
     {
-        /*$user_id = Auth::user()->id;
+        $user_id = Auth::user()->id;
         $task = Task::where('user_id', $user_id)->get();
-        دي طريقة تاني
-         */
-        $task = Auth::user()->tasks;
+        //$task = Auth::user()->tasks;
         return response()->json($task, 200);
     }
     public function store(StoreTaskRequest $request)
@@ -32,28 +30,43 @@ class TaskController extends Controller
     public function update(UpdateTaskRequest $request, $id)
     {
         $user_id = Auth::user()->id;
-        $task = Task::findOrFail($id);
-        if ($task->user_id != $user_id) {
-            return response()->json(['message' => 'Unauthorized'], 403);
+        $task = Task::where('user_id', $user_id)->find($id);
+        if (!$task) {
+            return response()->json(['message' => 'Task not found'], 404);
         }
         $task->update($request->validated());
         return response()->json($task, 200);
     }
     public function show($id)
     {
-        $task = Task::findOrFail($id);
+        $user_id = Auth::user()->id;
+        $task = Task::where('user_id', $user_id)->find($id);
+        if (!$task) {
+            return response()->json(['message' => 'Task not found'], 404);
+        }
         return response()->json($task, 200);
     }
 
     public function destroy($id)
     {
-        $task = Task::findOrFail($id);
+        $user_id = Auth::user()->id;
+        $task = Task::where('user_id', $user_id)->find($id);
+        if (!$task) {
+            return response()->json(['message' => 'Task not found'], 404);
+        }
         $task->delete();
-        return response()->json(null, 204);
+        return response()->json(['message' => 'task deleted successfully'], 200);
     }
     public function gettasksuser($id)
     {
-        $user = Task::findOrFail($id)->user;
+        $user_id = Auth::user()->id;
+        // $user = Task::findOrFail($id)->user;
+        $task = Task::where('user_id', $user_id)->find($id);
+        if (!$task) {
+            return response()->json(['message' => 'Task not found'], 404);
+        }
+        $user = $task->user; // Get the user associated with the task
+
         return response()->json($user, 200);
     }
     public function addCategorytoTask(StoreCategoryToTaskRequest $request, $id)
