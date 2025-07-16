@@ -7,8 +7,11 @@ use App\Http\Requests\StoreTaskRequest;
 use App\Http\Requests\UpdateTaskRequest;
 use App\Models\Task;
 use App\Models\User;
+use Exception;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Mockery\Expectation;
 
 class TaskController extends Controller
 {
@@ -72,8 +75,13 @@ class TaskController extends Controller
     public function addCategorytoTask(StoreCategoryToTaskRequest $request, $id)
     {
         $task = Task::findOrFail($id);
-        $task->categories()->attach($request->validated());
-        return response()->json(['message' => 'Category added successfully'], 200);
+        try {
+            $task->categories()->attach($request->validated());
+            return response()->json(['message' => 'Category added successfully'], 200);
+        } catch (Exception $e) {
+            return response()->json(['message' => 'this task is already has this category'], 200);
+        }
+
     }
     public function getCategorytoTask($id)
     {
