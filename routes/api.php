@@ -24,6 +24,9 @@ Route::get('task/all', [TaskController::class,'getalltasks'])->middleware('Check
 Route::post('tasks/{id}/categories', [TaskController::class, 'addCategorytoTask']);
 Route::get('tasks/{id}/categories', [TaskController::class, 'getCategorytoTask']);
 Route::get('tasks/{id}/user', [TaskController::class, 'gettasksuser']);
+Route::post('task/{id}/favorite', [TaskController::class, 'addFavoriteTask']);
+Route::delete('task/{id}/favorite', [TaskController::class, 'deleteFavoriteTask']);
+Route::get('task/favorite', [TaskController::class, 'getFavoriteTask']);
 
 
 Route::post('profile', [ProfileController::class, 'store']);

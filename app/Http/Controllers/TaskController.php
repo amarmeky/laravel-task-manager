@@ -15,6 +15,20 @@ use Mockery\Expectation;
 
 class TaskController extends Controller
 {
+    public function addFavoriteTask($taskid){
+        Task::findOrFail($taskid);
+        Auth::user()->favoriteTasks()->syncWithoutDetaching($taskid);
+        return response()->json(["message"=>"add to favorite successful"], 200);
+    }
+    public function deleteFavoriteTask($taskid){
+        Task::findOrFail($taskid);
+        Auth::user()->favoriteTasks()->detach($taskid);
+        return response()->json(["message"=>"remove from favorite successful"], 200);
+    }
+    public function getFavoriteTask(){
+        $favoriteTask=Auth::user()->favoriteTasks()->get();
+        return response()->json($favoriteTask, 200);
+    }
     public function getalltasks(){
         $task=Task::all();
         return response()->json($task, 200);

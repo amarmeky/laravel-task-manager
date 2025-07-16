@@ -15,4 +15,7 @@ class Task extends Model
     {
         return $this->belongsToMany(Category::class, 'category_task');
     }
+    public function favoriteusers(){
+        return $this->belongsToMany(User::class, 'favorite_task');
+    }
 }
