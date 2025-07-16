@@ -15,6 +15,10 @@ use Mockery\Expectation;
 
 class TaskController extends Controller
 {
+    public function getalltasks(){
+        $task=Task::all();
+        return response()->json($task, 200);
+    }
     public function index()
     {
         $user_id = Auth::user()->id;
