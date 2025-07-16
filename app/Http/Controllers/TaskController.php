@@ -19,6 +19,13 @@ class TaskController extends Controller
         $task=Task::all();
         return response()->json($task, 200);
     }
+    public function gettaskpriority()
+    {
+        $user_id = Auth::user()->id;
+        $task = Task::where('user_id', $user_id)->orderByRaw('FIELD(priority, "high", "medium", "low")')->get();
+        //$task = Auth::user()->tasks;
+        return response()->json($task, 200);
+    }
     public function index()
     {
         $user_id = Auth::user()->id;

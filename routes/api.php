@@ -19,6 +19,7 @@ Route::get('user/{id}/profile', [UserController::class, 'getprofile']);
 Route::get('user/{id}/tasks', [UserController::class, 'getusertasks']);
 
 Route::apiResource('tasks', TaskController::class); 
+Route::get('task/priority', [TaskController::class,'gettaskpriority']); 
 Route::get('task/all', [TaskController::class,'getalltasks'])->middleware('CheckUser'); 
 Route::post('tasks/{id}/categories', [TaskController::class, 'addCategorytoTask']);
 Route::get('tasks/{id}/categories', [TaskController::class, 'getCategorytoTask']);
