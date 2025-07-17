@@ -21,12 +21,12 @@ class UpdateProfileRequest extends FormRequest
      */
     public function rules(): array
     {
-      return [
-            'user_id'=>'exists:users,id|unique:profiles,user_id',
+    return [
             'name' => 'string|max:255',
             'email' => 'email|max:255',
-            'phone' => 'nullable|string|max:15',
-            'address' => 'nullable|string|max:500'
+            'phone' => 'string|max:15',
+            'address' => 'nullable|string|max:500',
+            'profile_picture' => 'image|mimes:jpg,png,jpeg,gif|max:2048'
         ];
     }
 }

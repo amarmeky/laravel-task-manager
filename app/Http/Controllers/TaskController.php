@@ -63,7 +63,10 @@ class TaskController extends Controller
             return response()->json(['message' => 'Task not found'], 404);
         }
         $task->update($request->validated());
-        return response()->json($task, 200);
+        if(!$task->wasChanged()){
+            return response()->json(['message' => 'No changes detected in task'], 400);
+        }
+        return response()->json(["message"=> "task updated successfully"], 200);
     }
     public function show($id)
     {
