@@ -6,17 +6,17 @@ use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/user', function (Request $request) {
-    return $request->user();
-})->middleware('auth:sanctum');
+
 
 Route::post('register',[UserController::class,'register']);
 Route::post('login',[UserController::class,'login']);
 Route::post('logout',[UserController::class,'logout'])->middleware('auth:sanctum');
 
 Route::middleware('auth:sanctum')->group(function(){
+
 Route::get('user/{id}/profile', [UserController::class, 'getprofile']);
 Route::get('user/{id}/tasks', [UserController::class, 'getusertasks']);
+Route::get('user', [UserController::class, 'getuser']);
 
 Route::apiResource('tasks', TaskController::class); 
 Route::get('task/priority', [TaskController::class,'gettaskpriority']); 

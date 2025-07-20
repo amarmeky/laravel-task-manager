@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
+use App\Http\Resources\UserResourse;
 use App\Models\Task;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -62,5 +63,10 @@ return response()->json([
             'message' => 'Tasks retrieved successfully',
             'tasks' => $tasks
         ], 200);
+    }
+    public function getuser(){
+        $user_id=Auth::user();
+        $user = User::findOrFail($user_id->id);
+        return  new UserResourse($user);
     }
 }
