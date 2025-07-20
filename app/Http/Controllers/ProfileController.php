@@ -28,6 +28,7 @@ class ProfileController extends Controller
         $validated['user_id'] = $user->id;
         $validated['name'] = $user->name;
         $validated['email'] = $user->email;
+        /** @var \Illuminate\Http\Request $request */
         if ($request->hasFile('profile_picture')) {
             $path = $request->file('profile_picture')->store('profile_picture', 'public');
             $validated['profile_picture'] = $path;
@@ -38,6 +39,7 @@ class ProfileController extends Controller
             'profile' => $profile
         ], 201);
     }
+    
     public function updateprofile(UpdateProfileRequest $request, $id)
     {
         $user = Auth::user();
@@ -46,6 +48,7 @@ class ProfileController extends Controller
             return response()->json(['message' => 'Profile not found'], 404);
         }
         $validated = $request->validated();
+            /** @var \Illuminate\Http\Request $request */
         if($request->hasFile('profile_picture')){
             $path = $request->file('profile_picture')->store('profile_picture', 'public');
             $validated['profile_picture'] = $path;
