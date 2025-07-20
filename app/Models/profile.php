@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Profile extends Model
 {
-    protected $guarded = ['id'];
+    protected $fillable = ['user_id', 'name', 'email', 'phone', 'address', 'profile_picture'];
     public function user()
     {
         return $this->belongsTo(User::class);

@@ -40,8 +40,21 @@ class ProfileController extends Controller
     }
     public function updateprofile(UpdateProfileRequest $request, $id)
     {
-        $profile = Profile::findOrFail($id);
-        $profile->update($request->validated());
+        $user = Auth::user();
+        $profile = Profile::where('user_id', $user->id)->find($id);
+        if(!$profile) {
+            return response()->json(['message' => 'Profile not found'], 404);
+        }
+        $validated = $request->validated();
+        if($request->hasFile('profile_picture')){
+            $path = $request->file('profile_picture')->store('profile_picture', 'public');
+            $validated['profile_picture'] = $path;
+        }
+
+        $profile->update($validated);
+        if(!$profile->wasChanged()) {
+            return response()->json(['message' => 'No changes made to the profile'], 200);
+        }
         return response()->json(['message' => 'Profile updated successfully'], 200);
     }
 }

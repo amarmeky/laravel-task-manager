@@ -31,7 +31,7 @@ Route::get('task/favorite', [TaskController::class, 'getFavoriteTask']);
 
 Route::post('profile', [ProfileController::class, 'store']);
 Route::get('profile/{id}', [ProfileController::class, 'show']);
-Route::put('user/{id}/profile', [ProfileController::class, 'updateprofile']);
+Route::post('user/{id}/profile', [ProfileController::class, 'updateprofile']);
 
 
 });

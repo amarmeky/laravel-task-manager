@@ -23,7 +23,6 @@ class UpdateProfileRequest extends FormRequest
     {
     return [
             'name' => 'string|max:255',
-            'email' => 'email|max:255',
             'phone' => 'string|max:15',
             'address' => 'nullable|string|max:500',
             'profile_picture' => 'image|mimes:jpg,png,jpeg,gif|max:2048'
