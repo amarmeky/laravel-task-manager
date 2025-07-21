@@ -53,8 +53,11 @@ class ProfileController extends Controller
             $path = $request->file('profile_picture')->store('profile_picture', 'public');
             $validated['profile_picture'] = $path;
         }
-
         $profile->update($validated);
+        if(isset($validated['name'])){
+        $user->name = $validated['name'] ;
+        $user->save();
+        }
         if(!$profile->wasChanged()) {
             return response()->json(['message' => 'No changes made to the profile'], 200);
         }
